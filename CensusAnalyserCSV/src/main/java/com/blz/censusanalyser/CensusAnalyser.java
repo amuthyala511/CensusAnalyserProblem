@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
@@ -13,8 +14,8 @@ public class CensusAnalyser {
 	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 			ICSVBuilder csvBuilder = CSVBuilderFactoy.createCsvBuilder();
-			Iterator<IndiaCensusCSV> iterator = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
-			return this.getCount(iterator);
+			List<IndiaCensusCSV> indiaCensusCSVList = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
+			return indiaCensusCSVList.size();
 		} catch (NoSuchFileException e) {
 			if (!csvFilePath.contains(".csv")) {
 				throw new CensusAnalyserException(e.getMessage(),
@@ -24,7 +25,7 @@ public class CensusAnalyser {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		} catch (CSVBuilderException e) {
-			throw new CensusAnalyserException(e.getMessage(), e.type.name());
+			throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
 		}
 		return numOfRecords;
 	}
@@ -33,8 +34,8 @@ public class CensusAnalyser {
 	public int loadIndiaCodeData(String csvFilePath) throws CensusAnalyserException {
 		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
 			ICSVBuilder csvBuilder = CSVBuilderFactoy.createCsvBuilder();
-			Iterator<IndiaCodeCSV> iterator = csvBuilder.getCSVFileIterator(reader, IndiaCodeCSV.class);
-			return this.getCount(iterator);
+			List<IndiaCensusCSV> indiaCensusCSVList = csvBuilder.getCSVFileIterator(reader, IndiaCodeCSV.class);
+			return indiaCensusCSVList.size();
 		} catch (NoSuchFileException e) {
 			if (!csvFilePath.contains(".csv")) {
 				throw new CensusAnalyserException(e.getMessage(),
@@ -44,7 +45,7 @@ public class CensusAnalyser {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		} catch (CSVBuilderException e) {
-			throw new CensusAnalyserException(e.getMessage(), e.type.name());
+			throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.UNABLE_TO_PARSE);
 		}
 		return numOfRecords;
 	}

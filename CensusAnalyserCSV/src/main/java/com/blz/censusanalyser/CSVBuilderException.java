@@ -3,17 +3,17 @@ package com.blz.censusanalyser;
 
 public class CSVBuilderException extends Exception {
 	enum ExceptionType {
-		CENSUS_FILE_PROBLEM, WRONG_FILE_TYPE, NO_SUCH_FILE, NO_SUCH_FIELD
+		CENSUS_FILE_PROBLEM, NO_SUCH_FILE, NO_SUCH_FIELD, UNABLE_TO_PARSE
 	}
 	
-	public CensusAnalyserException.ExceptionType type;
+	ExceptionType type;
 
-	public CSVBuilderException(String message, CensusAnalyserException.ExceptionType type) {
+	public CSVBuilderException(String message, ExceptionType type) {
 		super(message);
 		this.type = type;
 	}
 
-	public CSVBuilderException(String message, CensusAnalyserException.ExceptionType type, Throwable cause) {
+	public CSVBuilderException(String message, ExceptionType type, Throwable cause) {
 		super(message);
 		this.type = type;
 	}

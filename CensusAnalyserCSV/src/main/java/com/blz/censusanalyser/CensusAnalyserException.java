@@ -3,7 +3,7 @@ package com.blz.censusanalyser;
 public class CensusAnalyserException extends Exception {
 
 	enum ExceptionType {
-		CENSUS_FILE_PROBLEM, WRONG_FILE_TYPE, NO_SUCH_FILE, NO_SUCH_FIELD
+		CENSUS_FILE_PROBLEM, WRONG_FILE_TYPE, NO_SUCH_FILE, NO_SUCH_FIELD, UNABLE_TO_PARSE
 	}
 
 	public ExceptionType type;

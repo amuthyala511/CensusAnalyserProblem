@@ -2,7 +2,8 @@ package com.blz.censusanalyser;
 
 import java.io.Reader;
 import java.util.Iterator;
+import java.util.List;
 
 public interface ICSVBuilder<E> {
-	public Iterator<E> getCSVFileIterator(Reader reader, Class<E> csvClass) throws CSVBuilderException;
+	public <E> List<E> getCSVFileIterator(Reader reader, Class<E> csvClass) throws CSVBuilderException;
 }
