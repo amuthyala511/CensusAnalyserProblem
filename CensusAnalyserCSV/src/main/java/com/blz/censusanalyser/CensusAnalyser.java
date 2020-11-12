@@ -8,9 +8,6 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.stream.StreamSupport;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-
 public class CensusAnalyser {
 	static int numOfRecords = 0;
 	public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
@@ -26,6 +23,8 @@ public class CensusAnalyser {
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+		} catch (CSVBuilderException e) {
+			throw new CensusAnalyserException(e.getMessage(), e.type.name());
 		}
 		return numOfRecords;
 	}
@@ -44,6 +43,8 @@ public class CensusAnalyser {
 		} catch (IOException e) {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+		} catch (CSVBuilderException e) {
+			throw new CensusAnalyserException(e.getMessage(), e.type.name());
 		}
 		return numOfRecords;
 	}
