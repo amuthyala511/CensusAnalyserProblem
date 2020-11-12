@@ -26,6 +26,7 @@ public class CensusAnalyser {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
+		return numOfRecords;
 	}
 
 	
@@ -42,6 +43,7 @@ public class CensusAnalyser {
 			throw new CensusAnalyserException(e.getMessage(),
 					CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
 		}
+		return numOfRecords;
 	}
 	
 	private <E> int getCount(Iterator<E> iterator) {
